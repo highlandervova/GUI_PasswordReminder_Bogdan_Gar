@@ -82,9 +82,10 @@ public class Controller implements Initializable {
     }
 
     public void passwordField2KeyTyped(KeyEvent event) {
-        Pattern p = Pattern.compile("(\\d+\\.?\\d*)?");
         passwordField2.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!p.matcher(newValue).matches()) passwordField2.setText(oldValue);
+            if (!newValue.matches("\\d*")) {
+                passwordField2.setText(newValue.replaceAll("[^\\d]", ""));
+            }
         });
         messageLabel2.setText("Вводите только цифры!");
     }
